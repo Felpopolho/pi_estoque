@@ -1,6 +1,7 @@
 from _bibliotecas import *
 
 from inicial import inicial
+from admin import admin
 
 def login(tela): 
     frame()
@@ -35,14 +36,17 @@ def confirmar(tela,usuario,senha):
     usuario = usuario.get()
     senha = senha.get()
  
-    querry = f"SELECT * FROM administrador WHERE id_administrador = '{usuario}' LIMIT 1"
+    querry = f"SELECT * FROM usuario WHERE id = '{usuario}' LIMIT 1"
     resultado = banco_select(querry)
-       
-    if len(resultado) != 0:
-        for row in resultado:
-            if row[2] == senha:
-                inicial(tela, usuario)
-            else:
-                print("Usuário ou senha incorretos")
+    
+    if(len(resultado) != 0):   
+        
+        if (resultado[0][2] == senha and resultado[0][3] == 1):
+            inicial(tela, usuario)
+        elif(resultado[0][2] == senha and resultado[0][3] == 0):
+            admin(tela, usuario)
+        else:
+            messagebox.showerror("Erro", "Usuário ou senha incorretos")
+    
     else:
-        print("Usuário ou senha incorretos")
+            messagebox.showerror("Erro", "Usuário ou senha incorretos")    

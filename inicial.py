@@ -4,7 +4,10 @@ from tabela import tree_view
 from incluir import incluir
 from retirar import retirar
 
-def inicial(tela, usuario): 
+def inicial(tela, usuario):
+    def sair():
+        inicial.destroy()
+         
     frame()
 
     inicial = ttk.Frame(tela, style='EstiloFrame2.TFrame'
@@ -14,6 +17,7 @@ def inicial(tela, usuario):
     titulo = ttk.Frame(inicial,style='EstiloFrame.TFrame'
                     )
     titulo.place(relx = 0.05 , rely = 0.05, relwidth=0.9, relheight=0.08)
+    Label(titulo, text = 'Bem vindo ao estoque', background='white', font=('arial', 12, 'bold')).place(relx = 0.33, rely = 0.2)
 
     in_out = ttk.Frame(inicial,style='EstiloFrame.TFrame'
                     )
@@ -35,6 +39,12 @@ def inicial(tela, usuario):
     aviso = ttk.Frame(inicial,style='EstiloFrame.TFrame'
                     )
     aviso.place(relx = 0.55 , rely = 0.18, relwidth=0.4, relheight=0.3)
+    
+    logoff = ttk.Button(inicial,
+                       text='Sair',
+                       style="EstiloBotao.TButton",
+                       command=sair)
+    logoff.place(relx = 0.8 , rely = 0.85, relwidth=0.15, relheight=0.1)
 
     produtos = ttk.Frame(inicial,style='EstiloFrame.TFrame'
                     )
